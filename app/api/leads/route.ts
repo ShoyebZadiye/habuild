@@ -43,8 +43,8 @@ export async function POST(request: Request) {
     if (supabaseReady()) {
       const { error } = await getSupabase().from("leads").insert(lead);
       if (error) {
-        console.error("Supabase error:", error);
-        return Response.json({ error: "Database error" }, { status: 500 });
+        console.error("Supabase error:", JSON.stringify(error));
+        return Response.json({ error: "Database error", detail: error.message, code: error.code }, { status: 500 });
       }
     } else {
       await saveToFile(lead);
