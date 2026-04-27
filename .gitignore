@@ -42,3 +42,5 @@ next-env.d.ts
 
 # local leads data
 /data
+
+.vercel
