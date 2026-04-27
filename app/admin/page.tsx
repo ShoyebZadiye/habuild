@@ -4,8 +4,8 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
   const supabaseReady =
-    process.env.NEXT_PUBLIC_SUPABASE_URL?.startsWith("http") &&
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY !== "your_supabase_anon_key";
+    process.env.SUPABASE_URL?.startsWith("http") &&
+    !!process.env.SUPABASE_ANON_KEY;
 
   if (!supabaseReady) {
     return (

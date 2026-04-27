@@ -3,9 +3,8 @@ import { writeFile, readFile, mkdir } from "fs/promises";
 import path from "path";
 
 const supabaseReady =
-  process.env.NEXT_PUBLIC_SUPABASE_URL?.startsWith("http") &&
-  !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY &&
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY !== "your_supabase_anon_key";
+  process.env.SUPABASE_URL?.startsWith("http") &&
+  !!process.env.SUPABASE_ANON_KEY;
 
 async function saveToFile(lead: Record<string, unknown>) {
   const dir = path.join(process.cwd(), "data");
