@@ -44,14 +44,20 @@ type Database = {
   };
 };
 
+const clean = (s?: string) => s?.replace(/^﻿/, "").trim() ?? "";
+
 let _client: ReturnType<typeof createClient<Database>> | null = null;
 
 export function getSupabase() {
   if (!_client) {
     _client = createClient<Database>(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_ANON_KEY!
+      clean(process.env.SUPABASE_URL),
+      clean(process.env.SUPABASE_ANON_KEY)
     );
   }
   return _client;
 }
+
+export const supabaseReady = () =>
+  clean(process.env.SUPABASE_URL).startsWith("http") &&
+  clean(process.env.SUPABASE_ANON_KEY).length > 0;

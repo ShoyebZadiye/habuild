@@ -1,13 +1,9 @@
-import { getSupabase } from "@/lib/supabase";
+import { getSupabase, supabaseReady } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  const supabaseReady =
-    process.env.SUPABASE_URL?.startsWith("http") &&
-    !!process.env.SUPABASE_ANON_KEY;
-
-  if (!supabaseReady) {
+  if (!supabaseReady()) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center px-5 text-center gap-4">
         <span className="text-4xl">⚠️</span>

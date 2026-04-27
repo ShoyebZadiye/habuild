@@ -1,10 +1,6 @@
-import { getSupabase } from "@/lib/supabase";
+import { getSupabase, supabaseReady } from "@/lib/supabase";
 import { writeFile, readFile, mkdir } from "fs/promises";
 import path from "path";
-
-const supabaseReady =
-  process.env.SUPABASE_URL?.startsWith("http") &&
-  !!process.env.SUPABASE_ANON_KEY;
 
 async function saveToFile(lead: Record<string, unknown>) {
   const dir = path.join(process.cwd(), "data");
@@ -44,7 +40,7 @@ export async function POST(request: Request) {
       utm_term: utm_term ?? null,
     };
 
-    if (supabaseReady) {
+    if (supabaseReady()) {
       const { error } = await getSupabase().from("leads").insert(lead);
       if (error) {
         console.error("Supabase error:", error);
