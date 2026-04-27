@@ -56,6 +56,7 @@ export default async function AdminPage() {
                 <div>
                   <p className="font-bold text-lg">{lead.name}</p>
                   <p className="text-[var(--muted)] text-sm">{lead.email}</p>
+                  <p className="text-white text-sm font-medium">📱 {lead.whatsapp}</p>
                 </div>
                 <a
                   href={`https://wa.me/${lead.whatsapp.replace(/\D/g, "")}`}

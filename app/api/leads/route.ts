@@ -44,7 +44,7 @@ export async function POST(request: Request) {
       const { error } = await getSupabase().from("leads").insert(lead);
       if (error) {
         console.error("Supabase error:", JSON.stringify(error));
-        return Response.json({ error: "Database error", detail: error.message, code: error.code }, { status: 500 });
+        return Response.json({ error: "Database error" }, { status: 500 });
       }
     } else {
       await saveToFile(lead);
