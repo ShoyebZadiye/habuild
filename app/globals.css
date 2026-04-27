@@ -3,8 +3,8 @@
 :root {
   --bg: #080808;
   --card: #141414;
-  --accent: #3d9e6b;
-  --accent-light: #4bbe84;
+  --accent: #4ade80;
+  --accent-light: #86efac;
   --text: #ffffff;
   --muted: #9ca3af;
   --border: #222222;
@@ -33,7 +33,7 @@ body {
 
 .btn-primary {
   background: var(--accent);
-  color: white;
+  color: #0a0a0a;
   font-weight: 700;
   padding: 1rem 2rem;
   border-radius: 9999px;
