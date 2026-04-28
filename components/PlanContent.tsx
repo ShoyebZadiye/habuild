@@ -7,6 +7,25 @@ import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { pixelEvent } from "@/lib/pixel";
 
+const goalMotivation: Record<string, { headline: string; stat: string }> = {
+  pain: {
+    headline: "Tera Pain Relief plan ready hai! 🌿",
+    stat: "90% logon ki body pain pehle hafte mein reduce hoti hai",
+  },
+  stress: {
+    headline: "Tera Stress Relief plan ready hai! 🌬️",
+    stat: "85% logon ka anxiety level pehle 5 din mein improve hota hai",
+  },
+  energy: {
+    headline: "Tera Energy & Sleep plan ready hai! 🌙",
+    stat: "88% logon ki neend quality pehle hafte mein better hoti hai",
+  },
+  weight: {
+    headline: "Tera Weight Loss plan ready hai! ⚡",
+    stat: "92% logon ne 14 din mein body better feel kiya",
+  },
+};
+
 const planLabels: Record<string, string> = {
   pain: "Pain Relief",
   stress: "Stress Relief",
@@ -108,6 +127,8 @@ export default function PlanContent() {
     }
   };
 
+  const motive = goalMotivation[goal] ?? goalMotivation["stress"];
+
   return (
     <main className="min-h-screen flex flex-col px-5 py-10 max-w-md mx-auto gap-8">
       <motion.div
@@ -123,10 +144,14 @@ export default function PlanContent() {
           ))}
         </div>
         <h1 className="text-3xl font-black leading-tight mt-2">
-          Your 14-day habit plan is ready! 🎉
+          {motive.headline}
         </h1>
+        <div className="flex items-center gap-2 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl px-3 py-2">
+          <span className="text-[var(--accent)] text-sm">📊</span>
+          <p className="text-[var(--accent)] text-xs font-medium">{motive.stat}</p>
+        </div>
         <p className="text-[var(--muted)] text-sm">
-          Unlock it free — enter your details below to get instant access.
+          Neeche details bhar ke apna free plan unlock karo.
         </p>
       </motion.div>
 
