@@ -52,6 +52,8 @@ export default function AdminDashboard({ leads }: { leads: Lead[] }) {
   const [filterSource, setFilterSource] = useState("all");
   const [filterCampaign, setFilterCampaign] = useState("all");
   const [filterDate, setFilterDate] = useState("all");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
   const [activeTab, setActiveTab] = useState<"dashboard" | "leads">("dashboard");
 
   const today = new Date();
@@ -63,11 +65,18 @@ export default function AdminDashboard({ leads }: { leads: Lead[] }) {
   const campaigns = ["all", ...Array.from(new Set(leads.map((l) => l.utm_campaign).filter(Boolean))) as string[]];
 
   const filtered = useMemo(() => {
+    const fromDate = dateFrom ? new Date(dateFrom) : null;
+    const toDate = dateTo ? new Date(dateTo + "T23:59:59") : null;
+
     return leads.filter((l) => {
       const d = new Date(l.created_at);
       if (filterDate === "today" && d < today) return false;
       if (filterDate === "week" && d < weekAgo) return false;
       if (filterDate === "month" && d < monthAgo) return false;
+      if (filterDate === "custom") {
+        if (fromDate && d < fromDate) return false;
+        if (toDate && d > toDate) return false;
+      }
       if (filterGoal !== "all" && l.quiz_answers?.goal !== filterGoal) return false;
       if (filterSource !== "all" && l.utm_source !== filterSource) return false;
       if (filterCampaign !== "all" && l.utm_campaign !== filterCampaign) return false;
@@ -77,7 +86,7 @@ export default function AdminDashboard({ leads }: { leads: Lead[] }) {
       }
       return true;
     });
-  }, [leads, filterDate, filterGoal, filterSource, filterCampaign, search]);
+  }, [leads, filterDate, dateFrom, dateTo, filterGoal, filterSource, filterCampaign, search]);
 
   const todayLeads = leads.filter((l) => new Date(l.created_at) >= today).length;
   const weekLeads = leads.filter((l) => new Date(l.created_at) >= weekAgo).length;
@@ -199,12 +208,35 @@ export default function AdminDashboard({ leads }: { leads: Lead[] }) {
                 onChange={(e) => setSearch(e.target.value)}
                 className="bg-[#1a1a1a] border border-[var(--border)] text-white text-xs rounded-lg px-3 py-2 outline-none focus:border-[var(--accent)] flex-1 min-w-[180px]"
               />
-              <select value={filterDate} onChange={(e) => setFilterDate(e.target.value)} className={selectClass}>
+              <select
+                value={filterDate}
+                onChange={(e) => { setFilterDate(e.target.value); if (e.target.value !== "custom") { setDateFrom(""); setDateTo(""); } }}
+                className={selectClass}
+              >
                 <option value="all">📅 All time</option>
                 <option value="today">Today</option>
                 <option value="week">This week</option>
                 <option value="month">This month</option>
+                <option value="custom">📆 Custom range</option>
               </select>
+              {filterDate === "custom" && (
+                <>
+                  <input
+                    type="date"
+                    value={dateFrom}
+                    onChange={(e) => setDateFrom(e.target.value)}
+                    className={selectClass}
+                    title="From date"
+                  />
+                  <input
+                    type="date"
+                    value={dateTo}
+                    onChange={(e) => setDateTo(e.target.value)}
+                    className={selectClass}
+                    title="To date"
+                  />
+                </>
+              )}
               <select value={filterGoal} onChange={(e) => setFilterGoal(e.target.value)} className={selectClass}>
                 <option value="all">🎯 All goals</option>
                 <option value="pain">Pain Relief</option>
@@ -220,7 +252,7 @@ export default function AdminDashboard({ leads }: { leads: Lead[] }) {
               </select>
               {(search || filterGoal !== "all" || filterSource !== "all" || filterCampaign !== "all" || filterDate !== "all") && (
                 <button
-                  onClick={() => { setSearch(""); setFilterGoal("all"); setFilterSource("all"); setFilterCampaign("all"); setFilterDate("all"); }}
+                  onClick={() => { setSearch(""); setFilterGoal("all"); setFilterSource("all"); setFilterCampaign("all"); setFilterDate("all"); setDateFrom(""); setDateTo(""); }}
                   className="text-xs text-red-400 border border-red-400/30 rounded-lg px-3 py-2"
                 >
                   ✕ Clear

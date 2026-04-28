@@ -97,3 +97,7 @@ body {
 .phone-input .PhoneInputInput::placeholder {
   color: var(--muted);
 }
+
+input[type="date"] {
+  color-scheme: dark;
+}
