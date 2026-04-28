@@ -7,14 +7,14 @@ import { motion, AnimatePresence } from "framer-motion";
 const questions = [
   {
     id: "goal",
-    question: "Abhi sabse badi problem kya hai?",
+    question: "Tumhe yoga se kya chahiye?",
     emoji: "🎯",
-    motiveLine: "Yeh jaankar hi hum tumhara perfect plan banayenge!",
+    motiveLine: "Iske hisaab se hum tumhara sahi batch recommend karenge!",
     options: [
-      { label: "Back & body pain 🌿", value: "pain" },
-      { label: "Stress & anxiety 😮‍💨", value: "stress" },
-      { label: "Low energy / neend nahi 🌙", value: "energy" },
-      { label: "Weight loss chahiye ⚡", value: "weight" },
+      { label: "Back & body pain theek karna 🌿", value: "pain" },
+      { label: "Stress & anxiety kam karna 😮‍💨", value: "stress" },
+      { label: "Energy badhani / neend sudhaarni 🌙", value: "energy" },
+      { label: "Weight loss karna ⚡", value: "weight" },
     ],
   },
   {
@@ -45,7 +45,7 @@ const questions = [
     id: "level",
     question: "Yoga ka experience kitna hai?",
     emoji: "🌱",
-    motiveLine: "Beginner ho ya expert — plan tumhare liye hi taiyaar hoga!",
+    motiveLine: "Beginner ho ya expert — challenge mein sab ka swagat hai!",
     options: [
       { label: "Bilkul naya hoon 🌱", value: "beginner" },
       { label: "Kuch baar try kiya hai", value: "novice" },

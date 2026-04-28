@@ -9,49 +9,30 @@ import { pixelEvent } from "@/lib/pixel";
 
 const goalMotivation: Record<string, { headline: string; stat: string }> = {
   pain: {
-    headline: "Tera Pain Relief plan ready hai! 🌿",
+    headline: "Tera spot ready hai! 🌿",
     stat: "90% logon ki body pain pehle hafte mein reduce hoti hai",
   },
   stress: {
-    headline: "Tera Stress Relief plan ready hai! 🌬️",
-    stat: "85% logon ka anxiety level pehle 5 din mein improve hota hai",
+    headline: "Tera spot ready hai! 🌬️",
+    stat: "85% logon ka stress level pehle 5 din mein improve hota hai",
   },
   energy: {
-    headline: "Tera Energy & Sleep plan ready hai! 🌙",
+    headline: "Tera spot ready hai! 🌙",
     stat: "88% logon ki neend quality pehle hafte mein better hoti hai",
   },
   weight: {
-    headline: "Tera Weight Loss plan ready hai! ⚡",
+    headline: "Tera spot ready hai! ⚡",
     stat: "92% logon ne 14 din mein body better feel kiya",
   },
 };
 
-const planLabels: Record<string, string> = {
-  pain: "Pain Relief",
-  stress: "Stress Relief",
-  energy: "Energy & Sleep",
-  weight: "Weight Loss",
-  "5min": "5-Min Daily",
-  "15min": "15-Min Daily",
-  "30min": "30-Min Daily",
-  "30plus": "45-Min Daily",
-  morning: "Morning Flow",
-  afternoon: "Afternoon Reset",
-  evening: "Evening Wind-Down",
-  anytime: "Flexible",
-  beginner: "Beginner",
-  novice: "Foundation",
-  intermediate: "Intermediate",
-  advanced: "Advanced",
-};
-
-const weekPlan = [
-  { day: "Day 1–2", focus: "Breathwork & Awareness", duration: "Builds mindfulness baseline" },
-  { day: "Day 3–5", focus: "Gentle Movement", duration: "Activates body & reduces stiffness" },
-  { day: "Day 6–8", focus: "Core & Strength", duration: "Builds foundational strength" },
-  { day: "Day 9–11", focus: "Flow & Balance", duration: "Improves coordination & focus" },
-  { day: "Day 12–13", focus: "Deep Stretch", duration: "Releases tension & improves flexibility" },
-  { day: "Day 14", focus: "Full Body Flow", duration: "Integrates everything learned" },
+const challengeSchedule = [
+  { day: "Day 1–2", focus: "Breathwork & Awareness", detail: "Mindfulness baseline build karo" },
+  { day: "Day 3–5", focus: "Gentle Movement", detail: "Body activate karo, stiffness hatao" },
+  { day: "Day 6–8", focus: "Core & Strength", detail: "Foundation strength build karo" },
+  { day: "Day 9–11", focus: "Flow & Balance", detail: "Coordination & focus improve karo" },
+  { day: "Day 12–13", focus: "Deep Stretch", detail: "Tension release, flexibility badhao" },
+  { day: "Day 14", focus: "Full Body Flow", detail: "Sab kuch ek saath — transformation complete!" },
 ];
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -77,12 +58,12 @@ export default function PlanContent() {
 
   const validate = () => {
     const e: Record<string, string> = {};
-    if (!name.trim()) e.name = "Please enter your name.";
-    if (!emailRegex.test(email)) e.email = "Please enter a valid email address.";
+    if (!name.trim()) e.name = "Apna naam baro.";
+    if (!emailRegex.test(email)) e.email = "Valid email address daro.";
     if (!whatsapp) {
-      e.whatsapp = "Please enter your WhatsApp number.";
+      e.whatsapp = "WhatsApp number daro.";
     } else if (!isValidPhoneNumber(whatsapp as string)) {
-      e.whatsapp = "Please enter a valid WhatsApp number with country code.";
+      e.whatsapp = "Country code ke saath valid number daro.";
     }
     return e;
   };
@@ -119,10 +100,10 @@ export default function PlanContent() {
 
       if (!res.ok) throw new Error("Failed");
 
-      pixelEvent("Lead", { content_name: "habuild_plan" });
+      pixelEvent("Lead", { content_name: "habuild_challenge" });
       router.push(`/thank-you?name=${encodeURIComponent(name)}&goal=${goal}`);
     } catch {
-      setErrors({ form: "Something went wrong. Please try again." });
+      setErrors({ form: "Kuch gadbad ho gayi. Dobara try karo." });
       setLoading(false);
     }
   };
@@ -131,30 +112,26 @@ export default function PlanContent() {
 
   return (
     <main className="min-h-screen flex flex-col px-5 py-10 max-w-md mx-auto gap-8">
+
+      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col gap-2"
+        className="flex flex-col gap-3"
       >
-        <div className="flex gap-2 flex-wrap">
-          {[planLabels[goal], planLabels[time], planLabels[when], planLabels[level]].map((tag) => (
-            <span key={tag} className="text-xs font-semibold bg-[var(--accent)] text-black rounded-full px-3 py-1">
-              {tag}
-            </span>
-          ))}
-        </div>
-        <h1 className="text-3xl font-black leading-tight mt-2">
+        <h1 className="text-3xl font-black leading-tight">
           {motive.headline}
         </h1>
         <div className="flex items-center gap-2 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl px-3 py-2">
-          <span className="text-[var(--accent)] text-sm">📊</span>
+          <span className="text-sm">📊</span>
           <p className="text-[var(--accent)] text-xs font-medium">{motive.stat}</p>
         </div>
         <p className="text-[var(--muted)] text-sm">
-          Neeche details bhar ke apna free plan unlock karo.
+          Apna free spot claim karo — details bhar ke 14-day Habuild Yoga Challenge join karo.
         </p>
       </motion.div>
 
+      {/* Challenge preview — blurred */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -162,12 +139,12 @@ export default function PlanContent() {
         className="relative rounded-3xl overflow-hidden bg-[var(--card)] border border-[var(--border)]"
       >
         <div className="p-5 flex flex-col gap-3 blur-sm select-none pointer-events-none">
-          {weekPlan.map((item) => (
+          {challengeSchedule.map((item) => (
             <div key={item.day} className="flex items-start gap-3 py-2 border-b border-[var(--border)] last:border-0">
               <div className="w-2 h-2 rounded-full bg-[var(--accent)] mt-1.5 shrink-0" />
               <div>
                 <p className="text-sm font-bold text-white">{item.day}: {item.focus}</p>
-                <p className="text-xs text-[var(--muted)]">{item.duration}</p>
+                <p className="text-xs text-[var(--muted)]">{item.detail}</p>
               </div>
             </div>
           ))}
@@ -175,11 +152,12 @@ export default function PlanContent() {
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 backdrop-blur-[2px]">
           <span className="text-4xl mb-2">🔒</span>
           <p className="font-bold text-white text-center text-sm px-4">
-            Fill the form below to unlock your free plan
+            Register karo aur challenge unlock karo
           </p>
         </div>
       </motion.div>
 
+      {/* Registration form */}
       <motion.form
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -187,11 +165,10 @@ export default function PlanContent() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4"
       >
-        <h2 className="text-xl font-bold">Unlock your free plan</h2>
+        <h2 className="text-xl font-bold">Free Challenge Register Karo</h2>
 
-        {/* Name */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium text-[var(--muted)]">Your name</label>
+          <label className="text-sm font-medium text-[var(--muted)]">Tumhara naam</label>
           <input
             type="text"
             value={name}
@@ -203,7 +180,6 @@ export default function PlanContent() {
           {errors.name && <p className="text-red-400 text-xs">{errors.name}</p>}
         </div>
 
-        {/* Email */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-[var(--muted)]">Email address</label>
           <input
@@ -217,7 +193,6 @@ export default function PlanContent() {
           {errors.email && <p className="text-red-400 text-xs">{errors.email}</p>}
         </div>
 
-        {/* WhatsApp with flag + country code */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-[var(--muted)]">WhatsApp number</label>
           <PhoneInput
@@ -233,11 +208,11 @@ export default function PlanContent() {
         {errors.form && <p className="text-red-400 text-sm">{errors.form}</p>}
 
         <button type="submit" disabled={loading} className="btn-primary mt-2 disabled:opacity-60">
-          {loading ? "Unlocking..." : "Unlock My Free Plan 🔓"}
+          {loading ? "Register ho rahe ho..." : "🧘 Free Challenge Join Karo"}
         </button>
 
         <p className="text-center text-xs text-[var(--muted)]">
-          No spam. We&apos;ll send your plan via WhatsApp & email.
+          No spam. Challenge details WhatsApp & email par milenge.
         </p>
       </motion.form>
     </main>

@@ -42,51 +42,19 @@ function Confetti() {
   );
 }
 
-const goalData: Record<string, { title: string; stat: string; steps: string[] }> = {
-  pain: {
-    title: "Teri Pain Relief Plan",
-    stat: "90% logon ki body pain pehle hafte mein reduce hoti hai 🌿",
-    steps: [
-      "Subah 5 min gentle cat-cow stretches se shuru karo",
-      "45 min se zyada ek jagah mat baitho — movement break lo",
-      "Week 1 focus: spinal decompression & hip openers",
-    ],
-  },
-  stress: {
-    title: "Tera Stress Relief Plan",
-    stat: "85% logon ka anxiety level pehle 5 din mein improve hota hai 🌬️",
-    steps: [
-      "Har subah phone check karne se pehle 3 deep belly breaths lo",
-      "Raat ko: 10-min legs-up-the-wall pose before bed",
-      "Week 1 focus: breathwork & nervous system reset",
-    ],
-  },
-  energy: {
-    title: "Tera Energy & Sleep Plan",
-    stat: "88% logon ki neend quality pehle hafte mein better hoti hai 🌙",
-    steps: [
-      "Subah sunlight + 5-min yoga wake-up sequence",
-      "Sone se 30 min pehle screens band — restorative yoga karo",
-      "Week 1 focus: circadian rhythm reset through movement",
-    ],
-  },
-  weight: {
-    title: "Tera Weight Loss Plan",
-    stat: "92% logon ne 14 din mein body better feel kiya ⚡",
-    steps: [
-      "Sun salutations se shuru karo — calories burn + strength",
-      "Khane ke baad 10-min walk add karo",
-      "Week 1 focus: metabolism-boosting flow sequences",
-    ],
-  },
+const goalStats: Record<string, string> = {
+  pain: "90% logon ki body pain pehle hafte mein reduce hoti hai 🌿",
+  stress: "85% logon ka stress level pehle 5 din mein improve hota hai 🌬️",
+  energy: "88% logon ki neend quality pehle hafte mein better hoti hai 🌙",
+  weight: "92% logon ne 14 din mein body better feel kiya ⚡",
 };
 
 export default function ThankYouContent() {
   const searchParams = useSearchParams();
   const name = searchParams.get("name") ?? "Friend";
   const goal = searchParams.get("goal") ?? "stress";
-  const plan = goalData[goal] ?? goalData["stress"];
   const firstName = name.split(" ")[0];
+  const stat = goalStats[goal] ?? goalStats["stress"];
 
   useEffect(() => {
     pixelEvent("CompleteRegistration", { content_name: "habuild_signup" });
@@ -104,14 +72,14 @@ export default function ThankYouContent() {
       >
         <span className="text-6xl">🎉</span>
         <h1 className="text-3xl font-black">
-          {firstName}, tu in hai! 🙌
+          Welcome, {firstName}! 🙌
         </h1>
         <p className="text-[var(--muted)] text-base">
-          Tera personalised plan 5 minute mein WhatsApp & email par aa jayega.
+          Tu officially Habuild 14-Day Yoga Challenge ka hissa ban gaya/gayi! Challenge details 5 minute mein WhatsApp & email par aa jayegi.
         </p>
       </motion.div>
 
-      {/* Stat card */}
+      {/* Stat */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -119,25 +87,28 @@ export default function ThankYouContent() {
         className="bg-[var(--accent)]/10 border border-[var(--accent)]/30 rounded-2xl px-5 py-4 flex items-center gap-3"
       >
         <span className="text-2xl">📊</span>
-        <p className="text-sm text-[var(--accent)] font-medium">{plan.stat}</p>
+        <p className="text-sm text-[var(--accent)] font-medium">{stat}</p>
       </motion.div>
 
-      {/* Plan preview */}
+      {/* What to expect */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25 }}
-        className="bg-[var(--card)] border border-[var(--border)] rounded-3xl p-6 flex flex-col gap-4"
+        className="flex flex-col gap-3"
       >
-        <h2 className="text-xl font-bold text-[var(--accent)]">{plan.title}</h2>
-        <div className="flex flex-col gap-3">
-          {plan.steps.map((step, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <span className="text-[var(--accent)] font-black text-lg leading-none mt-0.5">{i + 1}.</span>
-              <p className="text-sm text-[var(--muted)] leading-relaxed">{step}</p>
-            </div>
-          ))}
-        </div>
+        <h3 className="font-bold text-lg">Aage kya hoga? 👇</h3>
+        {[
+          { icon: "📱", text: "WhatsApp par challenge ka full schedule milega" },
+          { icon: "📧", text: "Email par Day 1 ka welcome message aayega" },
+          { icon: "🔔", text: "Daily reminders taaki streak kabhi na toote" },
+          { icon: "👥", text: "Community group mein add kiya jaayega" },
+        ].map((item) => (
+          <div key={item.text} className="flex items-center gap-3 bg-[var(--card)] rounded-2xl px-4 py-3">
+            <span className="text-2xl">{item.icon}</span>
+            <span className="text-sm text-[var(--muted)]">{item.text}</span>
+          </div>
+        ))}
       </motion.div>
 
       {/* Streak hook */}
@@ -150,39 +121,19 @@ export default function ThankYouContent() {
         <span className="text-3xl">⏰</span>
         <div>
           <p className="font-bold text-sm">Day 1 kal se shuru hota hai!</p>
-          <p className="text-xs text-[var(--muted)] mt-0.5">Apne phone mein subah ka reminder set karo — streak mat tooto.</p>
+          <p className="text-xs text-[var(--muted)] mt-0.5">Subah ka alarm set karo — pehla din miss mat karna.</p>
         </div>
-      </motion.div>
-
-      {/* What next */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.45 }}
-        className="flex flex-col gap-3"
-      >
-        <h3 className="font-bold text-lg">Aage kya hoga?</h3>
-        {[
-          { icon: "📱", text: "Poora 14-din plan WhatsApp par milega" },
-          { icon: "📧", text: "Day 1 welcome email video links ke saath" },
-          { icon: "🔔", text: "Daily reminders taaki streak zinda rahe" },
-        ].map((item) => (
-          <div key={item.text} className="flex items-center gap-3 bg-[var(--card)] rounded-2xl px-4 py-3">
-            <span className="text-2xl">{item.icon}</span>
-            <span className="text-sm text-[var(--muted)]">{item.text}</span>
-          </div>
-        ))}
       </motion.div>
 
       {/* CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.55 }}
+        transition={{ delay: 0.45 }}
         className="flex flex-col gap-3 pb-8"
       >
         <p className="text-center text-sm text-[var(--muted)]">
-          Kisi dost ko bhi chahiye? Share karo 💛
+          Kisi dost ko bhi join karana hai? Share karo 💛
         </p>
         <a
           href={`https://wa.me/917969213331?text=${encodeURIComponent("I WANT TO JOIN")}`}

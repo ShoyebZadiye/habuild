@@ -13,33 +13,47 @@ export default function Home() {
           <span className="text-2xl font-black tracking-tight text-[var(--accent)]">habuild</span>
         </div>
 
-        {/* Hero — identity hook question */}
+        {/* Hero */}
         <div className="flex flex-col gap-4 pt-2 pb-5">
           <div className="w-16 h-16 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-4xl">
             🧘
           </div>
           <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent)]">
-            14-Day Free Yoga Plan
+            Free 14-Day Yoga Challenge
           </p>
           <h1 className="text-4xl font-black leading-tight tracking-tight">
             Subah uthte hi<br />
             <span className="text-[var(--accent)]">body stiff rehti hai?</span>
           </h1>
           <p className="text-[var(--muted)] text-base leading-relaxed">
-            Sirf 14 din mein — ek personalised yoga plan jo tumhari body, time aur goals ke hisaab se bana ho.
+            India ke sabse bade free yoga challenge mein join karo — 14 din, daily live sessions, aur ek community jo tumhare saath chalegi.
           </p>
         </div>
 
         {/* CTA above fold */}
         <div className="flex flex-col gap-2 pb-7">
           <Link href="/quiz" className="btn-primary">
-            Mera Free Plan Banao →
+            🧘 Free Challenge Join Karo →
           </Link>
           <div className="flex items-center justify-center gap-3 text-xs text-[var(--muted)]">
             <span>✅ Bilkul free</span>
             <span>⏱️ 60 seconds</span>
             <span>🔒 No spam</span>
           </div>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          {[
+            { value: "1.4 Cr+", label: "Participants" },
+            { value: "4.9 ⭐", label: "Google Rating" },
+            { value: "14 Din", label: "Free Challenge" },
+          ].map((s) => (
+            <div key={s.label} className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-3 text-center">
+              <p className="text-base font-black text-[var(--accent)]">{s.value}</p>
+              <p className="text-xs text-[var(--muted)] mt-0.5">{s.label}</p>
+            </div>
+          ))}
         </div>
 
         {/* Pain points */}
@@ -68,9 +82,9 @@ export default function Home() {
         <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 mb-6">
           <div className="flex gap-0.5 mb-2 text-sm">⭐⭐⭐⭐⭐</div>
           <p className="text-sm text-white leading-relaxed">
-            &ldquo;7 din mein meri back pain almost khatam ho gayi. Yeh plan actually kaam karta hai!&rdquo;
+            &ldquo;7 din mein meri back pain almost khatam ho gayi. Yeh challenge actually kaam karta hai!&rdquo;
           </p>
-          <p className="text-xs text-[var(--muted)] mt-2">— Priya S., Mumbai · Pain Relief plan</p>
+          <p className="text-xs text-[var(--muted)] mt-2">— Priya S., Mumbai · Habuild Challenge</p>
         </div>
 
         {/* Social proof */}
@@ -83,17 +97,17 @@ export default function Home() {
             ))}
           </div>
           <p className="text-xs text-[var(--muted)]">
-            <span className="text-white font-semibold">2,847</span> Indians ne is hafte start kiya
+            <span className="text-white font-semibold">2,847</span> Indians ne is hafte join kiya
           </p>
         </div>
 
-        {/* Bottom CTA with urgency */}
+        {/* Bottom CTA */}
         <div className="flex flex-col gap-3 pb-10">
           <Link href="/quiz" className="btn-primary">
-            Mera Free Plan Banao →
+            🧘 Free Challenge Join Karo →
           </Link>
           <p className="text-center text-xs text-[var(--accent)] font-semibold">
-            🔥 Aaj ke liye available — abhi banao
+            🔥 Aaj ke liye available — abhi join karo
           </p>
         </div>
 
