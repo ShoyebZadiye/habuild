@@ -85,10 +85,8 @@ export default function QuizPage() {
         setCurrentIndex((i) => i + 1);
       } else {
         setLoading(true);
-        setTimeout(() => {
-          const params = new URLSearchParams(newAnswers).toString();
-          router.push(`/plan?${params}`);
-        }, 5000);
+        const params = new URLSearchParams(newAnswers).toString();
+        router.push(`/plan?${params}`);
       }
     }, 380);
   };
