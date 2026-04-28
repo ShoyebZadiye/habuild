@@ -9,7 +9,7 @@ const questions = [
     id: "goal",
     question: "Tumhe yoga se kya chahiye?",
     emoji: "🎯",
-    motiveLine: "",
+    motiveLine: "Bas 4 sawaal — 60 seconds mein done!",
     options: [
       { label: "Back & body pain theek karna 🌿", value: "pain" },
       { label: "Stress & anxiety kam karna 😮‍💨", value: "stress" },
