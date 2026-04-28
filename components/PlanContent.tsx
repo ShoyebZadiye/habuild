@@ -9,19 +9,19 @@ import { pixelEvent } from "@/lib/pixel";
 
 const goalMotivation: Record<string, { headline: string; stat: string }> = {
   pain: {
-    headline: "Tera spot ready hai! 🌿",
+    headline: "Register Now — It's Free! 🔥",
     stat: "90% logon ki body pain pehle hafte mein reduce hoti hai",
   },
   stress: {
-    headline: "Tera spot ready hai! 🌬️",
+    headline: "Register Now — It's Free! 🔥",
     stat: "85% logon ka stress level pehle 5 din mein improve hota hai",
   },
   energy: {
-    headline: "Tera spot ready hai! 🌙",
+    headline: "Register Now — It's Free! 🔥",
     stat: "88% logon ki neend quality pehle hafte mein better hoti hai",
   },
   weight: {
-    headline: "Tera spot ready hai! ⚡",
+    headline: "Register Now — It's Free! 🔥",
     stat: "92% logon ne 14 din mein body better feel kiya",
   },
 };
