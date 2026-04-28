@@ -173,7 +173,7 @@ export default function PlanContent() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Priya Sharma"
+            placeholder="Shoyeb"
             autoComplete="name"
             className="w-full bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-[var(--muted)] text-base focus:outline-none focus:border-[var(--accent)] transition-colors"
           />
@@ -186,7 +186,7 @@ export default function PlanContent() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="priya@example.com"
+            placeholder="shoyebzadiye@gmail.com"
             autoComplete="email"
             className="w-full bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-[var(--muted)] text-base focus:outline-none focus:border-[var(--accent)] transition-colors"
           />
