@@ -75,7 +75,7 @@ export default function ThankYouContent() {
           Welcome, {firstName}! 🙌
         </h1>
         <p className="text-[var(--muted)] text-base">
-          Tu officially Habuild 14-Day Yoga Challenge ka hissa ban gaya/gayi! Challenge details 5 minute mein WhatsApp & email par aa jayegi.
+          You are now part of the Habuild 14-Day Yoga Challenge! Challenge details 5 minutes mein WhatsApp & email par aa jayegi.
         </p>
       </motion.div>
 
@@ -144,7 +144,7 @@ export default function ThankYouContent() {
           WhatsApp par baat karo
         </a>
         <Link href="/" className="text-center text-sm text-[var(--muted)] underline underline-offset-2">
-          Home par wapas jao
+          Back to Home
         </Link>
       </motion.div>
     </main>
