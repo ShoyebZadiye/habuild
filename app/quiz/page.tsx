@@ -88,7 +88,7 @@ export default function QuizPage() {
         setTimeout(() => {
           const params = new URLSearchParams(newAnswers).toString();
           router.push(`/plan?${params}`);
-        }, 2000);
+        }, 5000);
       }
     }, 380);
   };
