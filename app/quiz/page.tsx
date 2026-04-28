@@ -95,20 +95,45 @@ export default function QuizPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center px-5 max-w-md mx-auto gap-6">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="flex flex-col items-center gap-5 text-center"
-        >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
-            className="w-14 h-14 rounded-full border-4 border-[var(--accent)] border-t-transparent"
-          />
-          <h2 className="text-2xl font-black">Tumhara plan ban raha hai...</h2>
-          <p className="text-[var(--muted)] text-sm">Bas ek second — sab set ho raha hai 🌿</p>
-        </motion.div>
+      <main className="min-h-screen flex flex-col items-center justify-center px-5 max-w-md mx-auto gap-8">
+        <div className="flex flex-col items-center gap-6 text-center">
+          {/* Breathing animation */}
+          <div className="relative flex items-center justify-center w-32 h-32">
+            <motion.div
+              className="absolute rounded-full bg-[var(--accent)]/10"
+              animate={{ scale: [1, 1.6, 1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              style={{ width: 80, height: 80 }}
+            />
+            <motion.div
+              className="absolute rounded-full bg-[var(--accent)]/20"
+              animate={{ scale: [1, 1.35, 1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+              style={{ width: 80, height: 80 }}
+            />
+            <motion.div
+              className="rounded-full bg-[var(--accent)]/40 flex items-center justify-center"
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+              style={{ width: 80, height: 80 }}
+            >
+              <span className="text-3xl">🌿</span>
+            </motion.div>
+          </div>
+
+          <motion.p
+            animate={{ opacity: [1, 0.4, 1] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="text-[var(--accent)] text-sm font-semibold tracking-widest uppercase"
+          >
+            Saans lo... aur choddo...
+          </motion.p>
+
+          <div>
+            <h2 className="text-2xl font-black">Tumhara plan ban raha hai</h2>
+            <p className="text-[var(--muted)] text-sm mt-1">Bas ek second 🙏</p>
+          </div>
+        </div>
       </main>
     );
   }
