@@ -22,14 +22,14 @@ async function saveToFile(lead: Record<string, unknown>) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, whatsapp, quiz_answers, utm_source, utm_medium, utm_campaign, utm_content, utm_term } = body;
+    const { email, whatsapp, quiz_answers, utm_source, utm_medium, utm_campaign, utm_content, utm_term } = body;
 
-    if (!name || !email || !whatsapp) {
+    if (!email || !whatsapp) {
       return Response.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     const lead = {
-      name,
+      name: "",
       email,
       whatsapp,
       quiz_answers,
