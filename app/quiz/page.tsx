@@ -9,7 +9,7 @@ const questions = [
     id: "goal",
     question: "Tumhe yoga se kya chahiye?",
     emoji: "🎯",
-    motiveLine: "Iske hisaab se hum tumhara sahi batch recommend karenge!",
+    motiveLine: "",
     options: [
       { label: "Back & body pain theek karna 🌿", value: "pain" },
       { label: "Stress & anxiety kam karna 😮‍💨", value: "stress" },
@@ -120,7 +120,7 @@ export default function QuizPage() {
           <div className="flex flex-col gap-2">
             <span className="text-5xl">{current.emoji}</span>
             <h2 className="text-2xl font-black leading-snug">{current.question}</h2>
-            <p className="text-xs text-[var(--muted)]">{current.motiveLine}</p>
+            {current.motiveLine && <p className="text-xs text-[var(--muted)]">{current.motiveLine}</p>}
           </div>
 
           <div className="flex flex-col gap-3 mt-2">
