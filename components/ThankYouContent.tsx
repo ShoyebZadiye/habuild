@@ -120,7 +120,7 @@ export default function ThankYouContent() {
       >
         <span className="text-3xl">⏰</span>
         <div>
-          <p className="font-bold text-sm">Day 1 kal se shuru hota hai!</p>
+          <p className="font-bold text-sm">Day 1 Monday se shuru hota hai!</p>
           <p className="text-xs text-[var(--muted)] mt-0.5">Subah ka alarm set karo — pehla din miss mat karna.</p>
         </div>
       </motion.div>
