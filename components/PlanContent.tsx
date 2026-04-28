@@ -46,6 +46,7 @@ export default function PlanContent() {
   const when = searchParams.get("when") ?? "morning";
   const level = searchParams.get("level") ?? "beginner";
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(false);
@@ -57,6 +58,7 @@ export default function PlanContent() {
 
   const validate = () => {
     const e: Record<string, string> = {};
+    if (!name.trim()) e.name = "Apna naam likhein.";
     if (!emailRegex.test(email)) e.email = "Valid email address likhein.";
     if (!whatsapp) {
       e.whatsapp = "WhatsApp number likhein.";
@@ -88,6 +90,7 @@ export default function PlanContent() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          name,
           email,
           whatsapp,
           quiz_answers: { goal, time, when, level },
@@ -98,7 +101,7 @@ export default function PlanContent() {
       if (!res.ok) throw new Error("Failed");
 
       pixelEvent("Lead", { content_name: "habuild_challenge" });
-      router.push(`/thank-you?goal=${goal}`);
+      router.push(`/thank-you?name=${encodeURIComponent(name)}&goal=${goal}`);
     } catch {
       setErrors({ form: "Kuch problem aa gayi. Dobara try karein." });
       setLoading(false);
@@ -163,6 +166,19 @@ export default function PlanContent() {
         className="flex flex-col gap-4"
       >
         <h2 className="text-xl font-bold">Free Challenge Register Karo</h2>
+
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-[var(--muted)]">Aapka naam</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Shoyeb"
+            autoComplete="name"
+            className="w-full bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-[var(--muted)] text-base focus:outline-none focus:border-[var(--accent)] transition-colors"
+          />
+          {errors.name && <p className="text-red-400 text-xs">{errors.name}</p>}
+        </div>
 
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-[var(--muted)]">Email address</label>

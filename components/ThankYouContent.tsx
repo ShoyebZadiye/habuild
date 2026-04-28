@@ -51,7 +51,9 @@ const goalStats: Record<string, string> = {
 
 export default function ThankYouContent() {
   const searchParams = useSearchParams();
+  const name = searchParams.get("name") ?? "Friend";
   const goal = searchParams.get("goal") ?? "stress";
+  const firstName = name.split(" ")[0];
   const stat = goalStats[goal] ?? goalStats["stress"];
 
   useEffect(() => {
@@ -70,7 +72,7 @@ export default function ThankYouContent() {
       >
         <span className="text-6xl">🎉</span>
         <h1 className="text-3xl font-black">
-          Welcome to Habuild! 🙌
+          Welcome, {firstName}! 🙌
         </h1>
         <p className="text-[var(--muted)] text-base">
           Aap officially Habuild 14-Day Yoga Challenge ka hissa ban gaye! Challenge details 5 minutes mein WhatsApp & email par aa jayegi.
