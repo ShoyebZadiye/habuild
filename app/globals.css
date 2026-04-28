@@ -53,3 +53,47 @@ body {
 .btn-primary:active {
   transform: scale(0.98);
 }
+
+/* Phone input styles */
+.phone-input {
+  display: flex;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0 16px;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+.phone-input:focus-within {
+  border-color: var(--accent);
+}
+.phone-input .PhoneInputCountry {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.phone-input .PhoneInputCountrySelect {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.phone-input .PhoneInputCountrySelectArrow {
+  color: var(--muted);
+}
+.phone-input .PhoneInputInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px 0;
+  outline: none;
+}
+.phone-input .PhoneInputInput::placeholder {
+  color: var(--muted);
+}

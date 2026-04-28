@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import { pixelEvent } from "@/lib/pixel";
 
 const planLabels: Record<string, string> = {
@@ -33,6 +35,8 @@ const weekPlan = [
   { day: "Day 14", focus: "Full Body Flow", duration: "Integrates everything learned" },
 ];
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function PlanContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -44,22 +48,35 @@ export default function PlanContent() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
+  const [whatsapp, setWhatsapp] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     pixelEvent("ViewContent", { content_name: "plan_page" });
   }, []);
 
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!name.trim()) e.name = "Please enter your name.";
+    if (!emailRegex.test(email)) e.email = "Please enter a valid email address.";
+    if (!whatsapp) {
+      e.whatsapp = "Please enter your WhatsApp number.";
+    } else if (!isValidPhoneNumber(whatsapp as string)) {
+      e.whatsapp = "Please enter a valid WhatsApp number with country code.";
+    }
+    return e;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !whatsapp) {
-      setError("Please fill in all fields.");
+    const errs = validate();
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
       return;
     }
+    setErrors({});
     setLoading(true);
-    setError("");
 
     const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
     const utms: Record<string, string> = {};
@@ -86,7 +103,7 @@ export default function PlanContent() {
       pixelEvent("Lead", { content_name: "habuild_plan" });
       router.push(`/thank-you?name=${encodeURIComponent(name)}&goal=${goal}`);
     } catch {
-      setError("Something went wrong. Please try again.");
+      setErrors({ form: "Something went wrong. Please try again." });
       setLoading(false);
     }
   };
@@ -100,10 +117,7 @@ export default function PlanContent() {
       >
         <div className="flex gap-2 flex-wrap">
           {[planLabels[goal], planLabels[time], planLabels[when], planLabels[level]].map((tag) => (
-            <span
-              key={tag}
-              className="text-xs font-semibold bg-[var(--accent)] text-white rounded-full px-3 py-1"
-            >
+            <span key={tag} className="text-xs font-semibold bg-[var(--accent)] text-black rounded-full px-3 py-1">
               {tag}
             </span>
           ))}
@@ -150,26 +164,48 @@ export default function PlanContent() {
       >
         <h2 className="text-xl font-bold">Unlock your free plan</h2>
 
-        {[
-          { label: "Your name", value: name, setter: setName, type: "text", placeholder: "Priya Sharma", autoComplete: "name" },
-          { label: "Email address", value: email, setter: setEmail, type: "email", placeholder: "priya@example.com", autoComplete: "email" },
-          { label: "WhatsApp number", value: whatsapp, setter: setWhatsapp, type: "tel", placeholder: "+91 98765 43210", autoComplete: "tel" },
-        ].map((field) => (
-          <div key={field.label} className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-[var(--muted)]">{field.label}</label>
-            <input
-              type={field.type}
-              value={field.value}
-              onChange={(e) => field.setter(e.target.value)}
-              placeholder={field.placeholder}
-              autoComplete={field.autoComplete}
-              required
-              className="w-full bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-[var(--muted)] text-base focus:outline-none focus:border-[var(--accent)] transition-colors"
-            />
-          </div>
-        ))}
+        {/* Name */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-[var(--muted)]">Your name</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Priya Sharma"
+            autoComplete="name"
+            className="w-full bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-[var(--muted)] text-base focus:outline-none focus:border-[var(--accent)] transition-colors"
+          />
+          {errors.name && <p className="text-red-400 text-xs">{errors.name}</p>}
+        </div>
 
-        {error && <p className="text-red-400 text-sm">{error}</p>}
+        {/* Email */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-[var(--muted)]">Email address</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="priya@example.com"
+            autoComplete="email"
+            className="w-full bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-[var(--muted)] text-base focus:outline-none focus:border-[var(--accent)] transition-colors"
+          />
+          {errors.email && <p className="text-red-400 text-xs">{errors.email}</p>}
+        </div>
+
+        {/* WhatsApp with flag + country code */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-[var(--muted)]">WhatsApp number</label>
+          <PhoneInput
+            international
+            defaultCountry="IN"
+            value={whatsapp}
+            onChange={(val) => setWhatsapp(val)}
+            className="phone-input"
+          />
+          {errors.whatsapp && <p className="text-red-400 text-xs">{errors.whatsapp}</p>}
+        </div>
+
+        {errors.form && <p className="text-red-400 text-sm">{errors.form}</p>}
 
         <button type="submit" disabled={loading} className="btn-primary mt-2 disabled:opacity-60">
           {loading ? "Unlocking..." : "Unlock My Free Plan 🔓"}
