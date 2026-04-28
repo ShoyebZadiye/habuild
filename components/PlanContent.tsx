@@ -58,12 +58,12 @@ export default function PlanContent() {
 
   const validate = () => {
     const e: Record<string, string> = {};
-    if (!name.trim()) e.name = "Please enter your name.";
-    if (!emailRegex.test(email)) e.email = "Please enter a valid email address.";
+    if (!name.trim()) e.name = "Apna naam likhein.";
+    if (!emailRegex.test(email)) e.email = "Valid email address likhein.";
     if (!whatsapp) {
-      e.whatsapp = "Please enter your WhatsApp number.";
+      e.whatsapp = "WhatsApp number likhein.";
     } else if (!isValidPhoneNumber(whatsapp as string)) {
-      e.whatsapp = "Please enter a valid number with country code.";
+      e.whatsapp = "Country code ke saath valid number likhein.";
     }
     return e;
   };
@@ -103,7 +103,7 @@ export default function PlanContent() {
       pixelEvent("Lead", { content_name: "habuild_challenge" });
       router.push(`/thank-you?name=${encodeURIComponent(name)}&goal=${goal}`);
     } catch {
-      setErrors({ form: "Something went wrong. Please try again." });
+      setErrors({ form: "Kuch problem aa gayi. Dobara try karein." });
       setLoading(false);
     }
   };
