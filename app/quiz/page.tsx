@@ -36,7 +36,6 @@ const questions = [
     motiveLine: "Consistency time se zyada important hai!",
     options: [
       { label: "Subah — morning flow 🌅", value: "morning" },
-      { label: "Dopahar — lunch break ☀️", value: "afternoon" },
       { label: "Shaam — wind down 🌙", value: "evening" },
       { label: "Kabhi bhi, flexible hoon ✨", value: "anytime" },
     ],
