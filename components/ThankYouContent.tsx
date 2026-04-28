@@ -75,7 +75,7 @@ export default function ThankYouContent() {
           Welcome, {firstName}! 🙌
         </h1>
         <p className="text-[var(--muted)] text-base">
-          Aap officially Habuild 14-Day Yoga Challenge ka hissa ban gaye! Challenge details 5 minutes mein WhatsApp & email par aa jayegi.
+          Aap officially Habuild 14-Day Yoga Challenge ka hissa ban gaye! Challenge details 5 minutes mein WhatsApp par aa jayegi.
         </p>
       </motion.div>
 
@@ -100,7 +100,7 @@ export default function ThankYouContent() {
         <h3 className="font-bold text-lg">Aage kya hoga? 👇</h3>
         {[
           { icon: "📱", text: "WhatsApp par challenge ka full schedule milega" },
-          { icon: "📧", text: "Email par Day 1 ka welcome message aayega" },
+          { icon: "📱", text: "WhatsApp par Day 1 ka welcome message aayega" },
           { icon: "🔔", text: "Daily reminders taaki streak kabhi na toote" },
           { icon: "👥", text: "Community group mein add kiya jaayega" },
         ].map((item) => (

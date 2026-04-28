@@ -212,7 +212,7 @@ export default function PlanContent() {
         </button>
 
         <p className="text-center text-xs text-[var(--muted)]">
-          No spam. Challenge details WhatsApp & email par milenge.
+          No spam. Challenge details WhatsApp par milenge.
         </p>
       </motion.form>
     </main>
