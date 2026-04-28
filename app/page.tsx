@@ -10,24 +10,12 @@ export default function Home() {
 
         {/* Header */}
         <div className="flex items-center justify-between py-5">
-          <div className="flex items-center gap-2">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="14" cy="5" r="3" fill="#4ade80"/>
-              <path d="M7 12 Q14 8 21 12" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" fill="none"/>
-              <path d="M14 11 L14 20" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M14 20 L9 26" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M14 20 L19 26" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-            <span className="text-xl font-black tracking-tight text-white">Habuild</span>
-          </div>
+          <span className="text-xl font-black tracking-tight text-white">Habuild</span>
           <span className="text-sm font-bold text-[var(--accent)]">#HarGharYoga</span>
         </div>
 
         {/* Hero */}
         <div className="flex flex-col gap-4 pt-2 pb-5">
-          <div className="w-16 h-16 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-4xl">
-            🧘
-          </div>
           <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent)]">
             Free 14-Day Yoga Challenge
           </p>
