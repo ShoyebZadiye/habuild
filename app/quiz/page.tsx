@@ -67,6 +67,7 @@ export default function QuizPage() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [direction, setDirection] = useState(1);
   const [selected, setSelected] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const current = questions[currentIndex];
   const progress = ((currentIndex + 1) / questions.length) * 100;
@@ -83,11 +84,34 @@ export default function QuizPage() {
         setDirection(1);
         setCurrentIndex((i) => i + 1);
       } else {
-        const params = new URLSearchParams(newAnswers).toString();
-        router.push(`/plan?${params}`);
+        setLoading(true);
+        setTimeout(() => {
+          const params = new URLSearchParams(newAnswers).toString();
+          router.push(`/plan?${params}`);
+        }, 2000);
       }
     }, 380);
   };
+
+  if (loading) {
+    return (
+      <main className="min-h-screen flex flex-col items-center justify-center px-5 max-w-md mx-auto gap-6">
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="flex flex-col items-center gap-5 text-center"
+        >
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+            className="w-14 h-14 rounded-full border-4 border-[var(--accent)] border-t-transparent"
+          />
+          <h2 className="text-2xl font-black">Tumhara plan ban raha hai...</h2>
+          <p className="text-[var(--muted)] text-sm">Bas ek second — sab set ho raha hai 🌿</p>
+        </motion.div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen flex flex-col px-5 py-8 max-w-md mx-auto">

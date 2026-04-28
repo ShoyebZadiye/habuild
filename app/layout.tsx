@@ -9,13 +9,11 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Habuild – Build Your Yoga Habit",
-  description:
-    "Get your free personalised 14-day yoga habit plan in 60 seconds.",
+  title: "Habuild – Free 14-Day Yoga Challenge",
+  description: "India ka sabse bada free yoga challenge. 14 din, daily sessions, 1.4 crore+ participants. Abhi join karo!",
   openGraph: {
-    title: "Habuild – Build Your Yoga Habit",
-    description:
-      "Get your free personalised 14-day yoga habit plan in 60 seconds.",
+    title: "Habuild – Free 14-Day Yoga Challenge",
+    description: "India ka sabse bada free yoga challenge. 14 din, daily sessions, 1.4 crore+ participants. Abhi join karo!",
     type: "website",
   },
 };

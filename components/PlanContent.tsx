@@ -165,7 +165,10 @@ export default function PlanContent() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4"
       >
-        <h2 className="text-xl font-bold">Free Challenge Register Karo</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold">Free Challenge Register Karo</h2>
+          <span className="text-xs text-[var(--muted)] flex items-center gap-1">🔒 Secure</span>
+        </div>
 
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-[var(--muted)]">Aapka naam</label>
